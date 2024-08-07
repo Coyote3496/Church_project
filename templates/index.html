@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>128 Spiritual Gift Statements</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>128 Spiritual Gift Statements</h1>
+        <p>
+            The Inventory of Spiritual Gifts contains 128 statements. Check the boxes after each statement to the extent it reflects your life experience: Much, some, little, or none.
+        </p>
+        <p>
+            Please keep in mind that a spiritual gift is related to your attitude or outward behavior toward building the Body of Christ and the local church.
+        </p>
+        <form method="POST">
+            <div>
+                <label>Gender (Optional):</label><br>
+                <label><input type="radio" name="gender" value="Male"> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+            <div>
+                <label>Age (Optional):</label><br>
+                <label><input type="radio" name="age" value="18-24"> 18-24</label>
+                <label><input type="radio" name="age" value="25-34"> 25-34</label>
+                <label><input type="radio" name="age" value="35-44"> 35-44</label>
+                <label><input type="radio" name="age" value="45-54"> 45-54</label>
+                <label><input type="radio" name="age" value="55-64"> 55-64</label>
+                <label><input type="radio" name="age" value="65+"> 65+</label>
+            </div>
+            <div>
+                <label>Marriage Status (Optional):</label><br>
+                <label><input type="radio" name="marriage_status" value="Married"> Married</label>
+                <label><input type="radio" name="marriage_status" value="Unmarried"> Unmarried</label>
+                <label><input type="radio" name="marriage_status" value="Divorced"> Divorced</label>
+            </div>
+            <div>
+                <label>Christian Status (Optional):</label><br>
+                <label><input type="radio" name="christian_status" value="0-1 years"> 0-1 years</label>
+                <label><input type="radio" name="christian_status" value="1-5 years"> 1-5 years</label>
+                <label><input type="radio" name="christian_status" value="6-10 years"> 6-10 years</label>
+                <label><input type="radio" name="christian_status" value="11+"> 11 or above</label>
+            </div>
+            <ol>
+                {% for question in questions %}
+                <li>
+                    {{ question }}<br>
+                    <label><input type="radio" name="q{{ loop.index }}" value="3" required> Much</label>
+                    <label><input type="radio" name="q{{ loop.index }}" value="2"> Some</label>
+                    <label><input type="radio" name="q{{ loop.index }}" value="1"> Little</label>
+                    <label><input type="radio" name="q{{ loop.index }}" value="0"> None</label>
+                </li>
+                {% endfor %}
+            </ol>
+            <div>
+                <label>Email (Optional):</label><br>
+                <input type="email" name="email" placeholder="Enter your email address">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- JavaScript to auto-fill answers for testing purposes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = 128; // Total number of questions
+            for (let i = 1; i <= questions; i++) {
+                const randomValue = Math.floor(Math.random() * 4);
+                const radio = document.querySelector(`input[name="q${i}"][value="${randomValue}"]`);
+                if (radio) {
+                    radio.checked = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

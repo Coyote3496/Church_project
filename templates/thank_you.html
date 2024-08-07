@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Thank You for Your Response!</h1>
+        <p>Your responses have been recorded.</p>
+<!--
+         Display the summary table 
+        <h2>Summary of Your Responses</h2>
+        <div class="summary-container">
+            {{ summary_html|safe }}
+        </div>
+                  -->
+<!-- Display the detailed responses table -->
+<h2>Your Detailed Responses</h2>
+<p style="font-size: 0.9em; color: #666;">Please take a look at the provided pdf document for more information on what these results mean</p>
+<div class="detailed-responses-container">
+    <table class="detailed-responses-table">
+        <thead>
+            <tr>
+                <th>GIFTS</th>
+                {% for i in range(8) %}
+                    <th>R{{ i+1 }}</th>
+                {% endfor %}
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(16) %}
+                <tr>
+                    <td>{{ detailed_responses_array[i][0] }}</td> <!-- Use the first value as the label -->
+                    {% for j in range(1, 9) %} <!-- Start from 1 to skip the first value -->
+                        <td>{{ detailed_responses_array[i][j] }}</td>
+                    {% endfor %}
+                    <td>{{ detailed_responses_array[i][9] }}</td> <!-- Display the total in the last column -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+        <!-- Pagination controls -->
+        <div class="pagination">
+            {% if current_page > 1 %}
+                <a href="{{ url_for('thank_you_page', page=current_page-1) }}">Previous</a>
+            {% endif %}
+            {% if current_page < total_pages %}
+                <a href="{{ url_for('thank_you_page', page=current_page+1) }}">Next</a>
+            {% endif %}
+        </div>
+
+        <p>Would you like to receive your results via email?</p>
+        <form action="/email" method="POST">
+            <label for="email">Enter your email address:</label><br>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <button type="submit">Send Results</button>
+        </form>
+        <form action="/email" method="POST" style="margin-top: 10px;">
+            <input type="hidden" name="email" value="">
+            <button type="submit">No, thanks</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>
