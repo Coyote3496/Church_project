@@ -42,31 +42,5 @@
         </tbody>
     </table>
 </div>
-
-
-
-
-        <!-- Pagination controls -->
-        <div class="pagination">
-            {% if current_page > 1 %}
-                <a href="{{ url_for('thank_you_page', page=current_page-1) }}">Previous</a>
-            {% endif %}
-            {% if current_page < total_pages %}
-                <a href="{{ url_for('thank_you_page', page=current_page+1) }}">Next</a>
-            {% endif %}
-        </div>
-
-        <p>Would you like to receive your results via email?</p>
-        <form action="/email" method="POST">
-            <label for="email">Enter your email address:</label><br>
-            <input type="email" id="email" name="email" placeholder="Enter your email">
-            <button type="submit">Send Results</button>
-        </form>
-        <form action="/email" method="POST" style="margin-top: 10px;">
-            <input type="hidden" name="email" value="">
-            <button type="submit">No, thanks</button>
-        </form>
-        </div>
-    </div>
 </body>
 </html>
